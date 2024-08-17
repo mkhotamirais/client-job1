@@ -10,6 +10,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.overflow-x-scroll::-webkit-scrollbar,
+.overflow-y-scroll::-webkit-scrollbar,
+.overflow-scroll::-webkit-scrollbar {
+  @apply hidden;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

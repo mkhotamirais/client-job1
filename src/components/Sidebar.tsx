@@ -5,6 +5,7 @@ import {
   BaggageClaim,
   BatteryFull,
   ChartCandlestick,
+  X,
   ClipboardPenLine,
   HandPlatter,
   LayoutDashboard,
@@ -17,59 +18,69 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { TbLogout2 } from "react-icons/tb";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useMenu } from "@/hooks/useMenu";
 
 export function Sidebar() {
+  const { sidebar, closeSidebar } = useMenu();
+
+  const onClick = () => {
+    if (sidebar) {
+      closeSidebar();
+    }
+  };
+
+  const sidebarList = [
+    {
+      heading: "Menu",
+      menu: [
+        { href: "", label: "Dashboard", icon: LayoutDashboard },
+        { href: "", label: "Stock", icon: BatteryFull },
+        { href: "", label: "Restaurant", icon: HandPlatter },
+        { href: "", label: "Design", icon: SquareMousePointer },
+        { href: "", label: "Report", icon: ClipboardPenLine },
+        { href: "", label: "Role & Admin", icon: SquareUserRound },
+        { href: "", label: "Settings", icon: ChartCandlestick },
+      ],
+    },
+    {
+      heading: "Integration",
+      menu: [
+        { href: "", label: "Stocks", icon: BaggageClaim },
+        { href: "", label: "Supply", icon: Truck },
+      ],
+    },
+  ];
+
   return (
-    <div className={`z-50 fixed w-60 border-r h-screen bg-white flex flex-col`}>
+    <div
+      className={`${
+        sidebar ? "scale-x-100" : "scale-x-0"
+      } transition origin-left lg:scale-100 z-50 fixed w-60 border-r h-screen bg-white flex flex-col`}
+    >
+      <Button
+        onClick={onClick}
+        variant={"ghost"}
+        size={"icon"}
+        className="absolute lg:hidden rounded-none right-0 text-primary-main hover:text-destructive"
+      >
+        <X className="size-5" />
+      </Button>
+
       <div className="grow">
         <Logo />
         <Command className="px-2">
-          <CommandList>
-            <CommandGroup heading="Menu">
-              <CommandItem>
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                <span>Dashboard</span>
-                <CommandShortcut>
-                  <div className="text-white rounded-full flex items-center text-xs justify-center size-5 bg-gradient-to-br from-orange-400 to-orange-500">
-                    8
-                  </div>
-                </CommandShortcut>
-              </CommandItem>
-              <CommandItem>
-                <BatteryFull className="mr-2 h-4 w-4" />
-                <span>Stock</span>
-              </CommandItem>
-              <CommandItem>
-                <HandPlatter className="mr-2 h-4 w-4" />
-                <span>Restaurant</span>
-              </CommandItem>
-              <CommandItem>
-                <SquareMousePointer className="mr-2 h-4 w-4" />
-                <span>Design</span>
-              </CommandItem>
-              <CommandItem>
-                <ClipboardPenLine className="mr-2 h-4 w-4" />
-                <span>Report</span>
-              </CommandItem>
-              <CommandItem>
-                <SquareUserRound className="mr-2 h-4 w-4" />
-                <span>Role & Admin</span>
-              </CommandItem>
-              <CommandItem>
-                <ChartCandlestick className="mr-2 h-4 w-4" />
-                <span>Settings</span>
-              </CommandItem>
-            </CommandGroup>
-            <CommandGroup heading="Integration">
-              <CommandItem>
-                <BaggageClaim className="mr-2 h-4 w-4" />
-                <span>Stocks</span>
-              </CommandItem>
-              <CommandItem>
-                <Truck className="mr-2 h-4 w-4" />
-                <span>Supply</span>
-              </CommandItem>
-            </CommandGroup>
+          <CommandList onClick={onClick}>
+            {sidebarList.map((item, i) => (
+              <CommandGroup key={i} heading={item.heading}>
+                {item.menu.map((itm, idx) => (
+                  <CommandItem key={idx} className="my-2">
+                    {<itm.icon className="size-5 mr-2" />}
+                    <span>{itm.label}</span>
+                    {idx === 0 && i === 0 && <CommandShortcut>6</CommandShortcut>}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ))}
           </CommandList>
         </Command>
       </div>
@@ -77,7 +88,7 @@ export function Sidebar() {
       <Card className="mt-auto rounded-none border-none">
         <CardHeader className="flex flex-row items-center space-x-2">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src="/images/me.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="flex flex-col pb-1">
