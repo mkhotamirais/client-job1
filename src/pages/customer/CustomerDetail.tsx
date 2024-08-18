@@ -2,16 +2,20 @@ import { useCustomers } from "@/hooks/useCustomers";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import LoaderFade from "@/components/LoaderFade";
 
 export default function CustomerDetail() {
   const { id } = useParams();
-  const { singleData, getDataById } = useCustomers();
+  const { singleData, getDataById, loadSingleData, errSingleData } = useCustomers();
 
   useEffect(() => {
     if (id) {
       getDataById(id);
     }
   }, [getDataById, id]);
+
+  if (loadSingleData) return <LoaderFade />;
+  if (errSingleData) return <div>{errSingleData}</div>;
 
   const detailData = [
     { label: "ID", value: singleData?.id },
@@ -24,6 +28,7 @@ export default function CustomerDetail() {
     { label: "Created Time", value: moment(singleData?.createdAt).fromNow() },
     { label: "Updated Time", value: moment(singleData?.updatedAt).fromNow() },
   ];
+
   return (
     <div>
       <h2 className="text-2xl font-semibold">Detail {singleData?.customerName}</h2>

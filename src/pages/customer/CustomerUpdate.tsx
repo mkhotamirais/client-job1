@@ -12,12 +12,13 @@ import { url } from "@/constants";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useCustomers } from "@/hooks/useCustomers";
+import LoaderFade from "@/components/LoaderFade";
 
 type CustomerUpdateForm = z.infer<typeof customerUpdateSchema>;
 
 export default function CustomerUpdate() {
   const { id } = useParams();
-  const { singleData, getDataById } = useCustomers();
+  const { singleData, getDataById, loadSingleData, errSingleData } = useCustomers();
 
   const [pending, startTransition] = useTransition();
 
@@ -57,6 +58,9 @@ export default function CustomerUpdate() {
         });
     });
   };
+
+  if (loadSingleData) return <LoaderFade />;
+  if (errSingleData) return <div>{errSingleData}</div>;
 
   return (
     <div className="mb-12">
