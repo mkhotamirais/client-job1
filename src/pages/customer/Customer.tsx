@@ -2,7 +2,7 @@ import LoaderFade from "@/components/LoaderFade";
 import { columns } from "@/components/tables/Columns";
 import { MyTable } from "@/components/tables/MyTable";
 import { Customers, useCustomers } from "@/hooks/useCustomers";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 // const data: Customer[] = [
 //   {
