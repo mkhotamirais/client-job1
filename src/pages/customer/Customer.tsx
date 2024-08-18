@@ -1,95 +1,40 @@
-import Banner from "@/components/Banner";
 import { MyTable } from "@/components/tables/MyTable";
 
 // import { Payment, Columns } from "./Columns"
-import { columns, Payment } from "../../components/tables/Columns";
+import { columns } from "../../components/tables/Columns";
+import type { Customer } from "../../components/tables/Columns";
 import { Button } from "@/components/ui/button";
 
 // Fetch data from your API here.
-const data: Payment[] = [
+const data: Customer[] = [
   {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
+    customerName: "ahmad",
+    level: "warga",
+    favouriteMenu: "Chicken & Ribs Combo",
+    totalTransaction: 50000,
   },
   {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
+    customerName: "abdul",
+    level: "warga",
+    favouriteMenu: "Chicken & Ribs Combo",
+    totalTransaction: 70000,
   },
   {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 200,
-    status: "success",
-    email: "n@example.com",
+    customerName: "ayu",
+    level: "konglomerat",
+    favouriteMenu: "Chicken & Ribs Combo",
+    totalTransaction: 90000,
   },
 ];
 
 export default function Customer() {
   return (
     <>
-      <div className="grid grid-cols-4">
-        <div className="col-span-3">
-          <Banner />
+      <div className="grid col-span-3 xl:grid-cols-4">
+        <div className="col-span-3 my-2">
           <MyTable columns={columns} data={data} />
         </div>
-        <div className="m-2">
+        <div className="m-2 grid col-span-3 sm:col-span-1 xl:grid-cols-1 gap-2">
           <div className="relative h-56 border rounded-lg bg-primary-main text-white overflow-hidden">
             <div className="absolute inset-4 flex flex-col">
               <p className="grow font-medium">See analytics of the Customer Clearly</p>
@@ -99,7 +44,7 @@ export default function Customer() {
             <div className="absolute z-10 border border-white/50 size-72 -bottom-40 -right-40 rounded-full bg-white/15" />
             <div className="absolute z-10 border border-white/70 size-72 -bottom-52 -right-52 rounded-full bg-white/30" />
           </div>
-          <div className="relative bg-gray-50 rounded-lg my-3">
+          <div className="relative bg-gray-50 rounded-lg">
             <div className="p-4 flex flex-col gap-4">
               <div className="font-semibold text-2xl">
                 <h3>Top Menu</h3>
@@ -119,8 +64,6 @@ export default function Customer() {
               <div>5. Nasi Goreng Seafood</div>
             </div>
             <svg
-              width="100%"
-              height="100%"
               id="svg"
               viewBox="0 0 1440 590"
               xmlns="http://www.w3.org/2000/svg"
@@ -128,16 +71,16 @@ export default function Customer() {
             >
               <defs>
                 <linearGradient id="gradient" x1="53%" y1="0%" x2="47%" y2="100%">
-                  <stop offset="5%" stop-color="#ff6900"></stop>
-                  <stop offset="95%" stop-color="#ffffff"></stop>
+                  <stop offset="5%" stopColor="#ff6900"></stop>
+                  <stop offset="95%" stopColor="#ffffff"></stop>
                 </linearGradient>
               </defs>
               <path
                 d="M 0,600 L 0,150 C 40.22127451291665,141.09400854192015 80.4425490258333,132.1880170838403 111,120 C 141.5574509741667,107.81198291615969 162.4510784095835,92.34194020655895 201,114 C 239.5489215904165,135.65805979344105 295.7531373358328,194.44422208992384 338,194 C 380.2468626641672,193.55577791007616 408.5363722470853,133.8811714337456 443,102 C 477.4636277529147,70.1188285662544 518.1013736758259,66.03109217509373 556,102 C 593.8986263241741,137.96890782490627 629.058133049611,213.99445986587958 670,215 C 710.941866950389,216.00554013412042 757.6660941257302,141.99106836138785 794,122 C 830.3339058742698,102.00893163861215 856.2774904474688,136.041266688569 892,163 C 927.7225095525312,189.958733311431 973.2239440843939,209.84386488433606 1012,198 C 1050.776055915606,186.15613511566394 1082.826733214955,142.58327377408673 1114,135 C 1145.173266785045,127.41672622591327 1175.469123055785,155.82304001931698 1213,174 C 1250.530876944215,192.17695998068302 1295.296774561904,200.12456614864544 1334,198 C 1372.703225438096,195.87543385135456 1405.343778696599,183.67869538610128 1422,174 C 1438.656221303401,164.32130461389872 1439.3281106517006,157.16065230694937 1440,150 L 1440,600 L 0,600 Z"
                 stroke="none"
-                stroke-width="0"
+                strokeWidth="0"
                 fill="url(#gradient)"
-                fill-opacity="0.53"
+                fillOpacity="0.53"
                 className="transition-all duration-300 ease-in-out delay-150 path-0"
               ></path>
             </svg>

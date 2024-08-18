@@ -1,17 +1,15 @@
-import { Plus } from "lucide-react";
-import { Button } from "./ui/button";
+import React from "react";
 
-export default function Banner() {
+export default function Banner({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative h-32 my-2 border overflow-hidden rounded-lg">
-      <div className="z-10 w-1/3 h-full bg-primary-main" />
-      <div className="z-10 absolute border-r-[2px] border-r-indigo-300 size-32 scale-[170%] left-1/3 bottom-1/2 -translate-x-1/3 rotate-45 bg-primary-main" />
+    <div className="relative h-48 md:h-36 border overflow-hidden rounded-lg bg-primary-main">
+      <div className="z-10 absolute border-r-[2px] border-r-indigo-300 size-40 scale-[200%] left-1/4 md:left-1/3 bottom-2/3 -translate-x-1/3 rotate-45 bg-primary-main" />
       <div
         style={{
           background:
             "linear-gradient(to right, rgba(0,0,0,.7), rgba(0,0,0,.2)), url(/images/pix-family.jpg) center/cover no-repeat",
         }}
-        className="absolute bg-gray-500/15 w-2/3 h-32 right-0 bottom-0"
+        className="absolute bg-gray-500/15 w-2/3 h-48 md:h-36 right-0 bottom-0"
       />
       <div className="absolute z-30 inset-[0.6rem] text-white flex flex-col justify-between">
         <div>
@@ -21,12 +19,7 @@ export default function Banner() {
             Also you can delete it easily.
           </p>
         </div>
-        <div className="*:text-sm">
-          <Button size={"sm"} className="backdrop-blur bg-white/15 hover:bg-white/30">
-            <Plus className="size-4 mr-2" />
-            <span>Add New Customer</span>
-          </Button>
-        </div>
+        {children}
       </div>
     </div>
   );
