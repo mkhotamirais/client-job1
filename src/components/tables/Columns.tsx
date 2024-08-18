@@ -1,15 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
 import { ChevronsUpDown } from "lucide-react";
+import { Customers } from "@/hooks/useCustomers";
 
-export type Customer = {
-  customerName: string;
-  level: "warga" | "juragan" | "sultan" | "konglomerat";
-  favouriteMenu: string;
-  totalTransaction: number;
-};
-
-export const columns: ColumnDef<Customer>[] = [
+export const columns: ColumnDef<Customers, unknown>[] = [
   {
     accessorKey: "customerName",
     header: ({ column }) => {
