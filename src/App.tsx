@@ -1,6 +1,6 @@
 import { Toaster } from "sonner";
 import { Sidebar } from "./components/Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 export default function App() {
   return (
@@ -10,6 +10,7 @@ export default function App() {
         <Outlet />
       </main>
       <Toaster richColors closeButton position="top-right" />
+      <ScrollRestoration />
     </div>
   );
 }
